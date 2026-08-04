@@ -50,7 +50,7 @@ const socialLinks: readonly SocialLink[] = [
     },
     {
         label: 'Twitter',
-        href: 'https://x.com/OrangeSagoCream',
+        href: 'https://x.com/OrangeSago',
         logoAlt: 'Twitter',
         logoSrc: '/svgl/x.svg',
         toneClass: 'social-link--twitter',
