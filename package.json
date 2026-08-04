@@ -25,6 +25,8 @@
         "@paper-design/shaders-react": "^0.0.76",
         "@phosphor-icons/react": "^2.1.10",
         "@vercel/analytics": "^2.0.1",
+        "@vercel/edge-config": "^1.4.3",
+        "complete-common": "^2.29.0",
         "next": "16.2.7",
         "qr-code-styling": "^1.9.2",
         "react": "19.2.7",

@@ -3,118 +3,35 @@ import Image from 'next/image';
 
 import { QRCodeDialog } from '@/components/QRCodeDialog';
 import { ShaderBackground } from '@/components/ShaderBackground';
+import type { SocialLink } from '@/data/social-links';
 
-interface SocialLink {
-    readonly label: string;
-    readonly href: string;
-    readonly logoAlt: string;
-    readonly logoSrc: string;
-    readonly toneClass: string;
+interface AppProps {
+    readonly socialLinks: readonly SocialLink[];
 }
 
-const socialLinks: readonly SocialLink[] = [
-    {
-        label: 'Facebook',
-        href: 'https://www.facebook.com/profile.php?id=100011113621038',
-        logoAlt: 'Facebook',
-        logoSrc: '/svgl/facebook.svg',
-        toneClass: 'social-link--facebook',
-    },
-    {
-        label: 'Instagram',
-        href: 'https://www.instagram.com/ccc_hsi/',
-        logoAlt: 'Instagram',
-        logoSrc: '/svgl/instagram.svg',
-        toneClass: 'social-link--instagram',
-    },
-    {
-        label: 'Threads',
-        href: 'https://www.threads.com/@ccc_hsi',
-        logoAlt: 'Threads',
-        logoSrc: '/svgl/threads.svg',
-        toneClass: 'social-link--threads',
-    },
-    {
-        label: 'LinkedIn',
-        href: 'https://www.linkedin.com/in/its-hsi-chen/',
-        logoAlt: 'LinkedIn',
-        logoSrc: '/svgl/linkedin.svg',
-        toneClass: 'social-link--linkedin',
-    },
-    {
-        label: 'GitHub',
-        href: 'https://github.com/Hsiii',
-        logoAlt: 'GitHub',
-        logoSrc: '/svgl/github.svg',
-        toneClass: 'social-link--github',
-    },
-    {
-        label: 'Twitter',
-        href: 'https://x.com/OrangeSagoCream',
-        logoAlt: 'Twitter',
-        logoSrc: '/svgl/x.svg',
-        toneClass: 'social-link--twitter',
-    },
-    {
-        label: 'Pixiv',
-        href: 'https://www.pixiv.net/users/64764125',
-        logoAlt: 'Pixiv',
-        logoSrc: '/svgl/pixiv.jpeg',
-        toneClass: 'social-link--pixiv',
-    },
-    {
-        label: 'Discord',
-        href: 'discord://-/users/917446775873343600',
-        logoAlt: 'Discord',
-        logoSrc: '/svgl/discord.svg',
-        toneClass: 'social-link--discord',
-    },
-    {
-        label: 'Spotify',
-        href: 'https://open.spotify.com/user/31bturepoosptp5xv2vln3nqz7ca',
-        logoAlt: 'Spotify',
-        logoSrc: '/svgl/spotify.svg',
-        toneClass: 'social-link--spotify',
-    },
-    {
-        label: 'Steam',
-        href: 'https://steamcommunity.com/id/sagocream/',
-        logoAlt: 'Steam',
-        logoSrc: '/svgl/steam.svg',
-        toneClass: 'social-link--steam',
-    },
-    {
-        label: 'TETR.IO',
-        href: 'https://ch.tetr.io/u/sagocream',
-        logoAlt: 'TETR.IO',
-        logoSrc: '/svgl/tetrio.svg',
-        toneClass: 'social-link--tetrio',
-    },
-];
+export function App({ socialLinks }: AppProps): JSX.Element {
+    const webProfileUrls = socialLinks
+        .map(({ href }) => href)
+        .filter((href) => href.startsWith('https://'));
+    const profileStructuredDataJson = JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'ProfilePage',
+        'mainEntity': {
+            '@type': 'Person',
+            'name': 'Hsi Chen',
+            'alternateName': [
+                'Hsiii',
+                'ccc_hsi',
+                'OrangeSagoCream',
+                'sagocream',
+            ],
+            'description': 'Design-focused software developer.',
+            'image': 'https://links.hsichen.dev/profile/hsi.png',
+            'url': 'https://links.hsichen.dev',
+            'sameAs': webProfileUrls,
+        },
+    }).replaceAll('<', String.raw`\u003c`);
 
-const webProfileUrls = socialLinks
-    .map(({ href }) => href)
-    .filter((href) => href.startsWith('https://'));
-
-const profileStructuredData = {
-    '@context': 'https://schema.org',
-    '@type': 'ProfilePage',
-    'mainEntity': {
-        '@type': 'Person',
-        'name': 'Hsi Chen',
-        'alternateName': ['Hsiii', 'ccc_hsi', 'OrangeSagoCream', 'sagocream'],
-        'description': 'Design-focused software developer.',
-        'image': 'https://links.hsichen.dev/profile/hsi.png',
-        'url': 'https://links.hsichen.dev',
-        'sameAs': webProfileUrls,
-    },
-} as const;
-
-const profileStructuredDataJson = JSON.stringify(
-    profileStructuredData
-).replaceAll('<', String.raw`\u003c`);
-
-export function App(): JSX.Element {
     return (
         <>
             <script
@@ -142,7 +59,7 @@ export function App(): JSX.Element {
 
                     <nav aria-label='Social links' className='social-list'>
                         {socialLinks.map(
-                            ({ label, href, logoAlt, logoSrc, toneClass }) => (
+                            ({ label, href, logoSrc, toneClass }) => (
                                 <a
                                     className={`social-link ${toneClass}`}
                                     href={href}
@@ -155,7 +72,7 @@ export function App(): JSX.Element {
                                         className='social-link__icon'
                                     >
                                         <Image
-                                            alt={logoAlt}
+                                            alt={label}
                                             className='social-link__logo'
                                             height={28}
                                             src={logoSrc}
