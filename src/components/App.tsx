@@ -43,7 +43,7 @@ const socialLinks: readonly SocialLink[] = [
     },
     {
         label: 'GitHub',
-        href: 'https://github.com/orangesago',
+        href: 'https://github.com/sago-cream',
         logoAlt: 'GitHub',
         logoSrc: '/svgl/github.svg',
         toneClass: 'social-link--github',
