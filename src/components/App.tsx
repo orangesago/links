@@ -43,7 +43,7 @@ const socialLinks: readonly SocialLink[] = [
     },
     {
         label: 'GitHub',
-        href: 'https://github.com/Hsiii',
+        href: 'https://github.com/orangesago',
         logoAlt: 'GitHub',
         logoSrc: '/svgl/github.svg',
         toneClass: 'social-link--github',
@@ -102,7 +102,13 @@ const profileStructuredData = {
     'mainEntity': {
         '@type': 'Person',
         'name': 'Hsi Chen',
-        'alternateName': ['Hsiii', 'ccc_hsi', 'OrangeSagoCream', 'sagocream'],
+        'alternateName': [
+            'orangesago',
+            'Hsiii',
+            'ccc_hsi',
+            'OrangeSagoCream',
+            'sagocream',
+        ],
         'description': 'Design-focused software developer.',
         'image': 'https://links.hsichen.dev/profile/hsi.png',
         'url': 'https://links.hsichen.dev',
