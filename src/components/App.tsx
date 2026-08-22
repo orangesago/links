@@ -101,12 +101,10 @@ const socialLinks: readonly SocialLink[] = [
 const sagoLinkLabels = new Set([
     'Discord',
     'GitHub',
-    'Instagram',
     'Pixiv',
     'Spotify',
     'Steam',
     'TETR.IO',
-    'Threads',
     'Twitter',
 ]);
 
