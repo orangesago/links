@@ -134,8 +134,14 @@ const profiles = {
 export function App({ profile = 'hsi' }: AppProps): JSX.Element {
     const identity = profiles[profile];
     const isSago = profile === 'sago';
+    const sagoSocialLinks = socialLinks.filter(({ label }) =>
+        sagoLinkLabels.has(label)
+    );
     const visibleSocialLinks = isSago
-        ? socialLinks.filter(({ label }) => sagoLinkLabels.has(label))
+        ? [
+              ...sagoSocialLinks.filter(({ label }) => label !== 'GitHub'),
+              ...sagoSocialLinks.filter(({ label }) => label === 'GitHub'),
+          ]
         : socialLinks;
     const webProfileUrls = visibleSocialLinks
         .map(({ href }) => href)
@@ -164,7 +170,9 @@ export function App({ profile = 'hsi' }: AppProps): JSX.Element {
                 <ShaderBackground />
                 <div className='linktree'>
                     <QRCodeDialog siteUrl={identity.siteUrl} />
-                    <header className='identity identity--primary'>
+                    <header
+                        className={`identity identity--primary${isSago ? ' identity--sago-primary' : ''}`}
+                    >
                         <Image
                             alt={identity.name}
                             className='identity-card__avatar'
