@@ -182,14 +182,12 @@ export function App(): JSX.Element {
                         <p className='identity-card__description'>
                             My creative side for art, music, and games.
                         </p>
-                        <h2 className='identity-card__title'>
-                            Orange Sago Cream
-                        </h2>
+                        <h2 className='identity-card__title'>Sago Cream</h2>
                         <Image
-                            alt='Orange Sago Cream'
+                            alt='Sago Cream'
                             className='identity-card__avatar'
                             height={104}
-                            src='/profile/sago.png'
+                            src='/profile/sago.jpg'
                             width={104}
                         />
                     </footer>
