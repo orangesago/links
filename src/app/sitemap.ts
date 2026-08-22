@@ -1,6 +1,6 @@
 import type { MetadataRoute } from 'next';
 
-const siteUrl = 'https://links.hsichen.dev';
+import { siteUrl } from '@/constants/site';
 
 export const dynamic = 'force-static';
 
