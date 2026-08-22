@@ -114,6 +114,10 @@ a {
     margin-top: calc(var(--space-12) * -1);
 }
 
+.identity--sago-primary .identity-card__title {
+    margin-bottom: var(--space-8);
+}
+
 .identity--sago .identity-card__description {
     margin-bottom: calc(var(--space-8) * -1);
 }
