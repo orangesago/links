@@ -167,7 +167,7 @@ export function App({ profile = 'hsi' }: AppProps): JSX.Element {
                 type='application/ld+json'
             />
             <main className='app'>
-                <ShaderBackground />
+                <ShaderBackground variant={profile} />
                 <div className='linktree'>
                     <QRCodeDialog siteUrl={identity.siteUrl} />
                     <header
