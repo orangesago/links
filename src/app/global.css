@@ -110,7 +110,7 @@ a {
     text-wrap: pretty;
 }
 
-.identity--hsi .identity-card__description {
+.identity--primary .identity-card__description {
     margin-top: calc(var(--space-12) * -1);
 }
 
