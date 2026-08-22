@@ -12,6 +12,12 @@ interface SocialLink {
     readonly toneClass: string;
 }
 
+type Profile = 'hsi' | 'sago';
+
+interface AppProps {
+    readonly profile?: Profile;
+}
+
 const socialLinks: readonly SocialLink[] = [
     {
         label: 'Facebook',
@@ -92,35 +98,64 @@ const socialLinks: readonly SocialLink[] = [
     },
 ];
 
-const webProfileUrls = socialLinks
-    .map(({ href }) => href)
-    .filter((href) => href.startsWith('https://'));
+const sagoLinkLabels = new Set([
+    'Discord',
+    'GitHub',
+    'Instagram',
+    'Pixiv',
+    'Spotify',
+    'Steam',
+    'TETR.IO',
+    'Threads',
+    'Twitter',
+]);
 
-const profileStructuredData = {
-    '@context': 'https://schema.org',
-    '@type': 'ProfilePage',
-    'mainEntity': {
-        '@type': 'Person',
-        'name': 'Hsi Chen',
-        'alternateName': [
+const profiles = {
+    hsi: {
+        name: 'Hsi Chen',
+        alternateNames: [
             'orangesago',
             'Hsiii',
             'ccc_hsi',
             'OrangeSagoCream',
             'sagocream',
         ],
-        'description': 'Design-focused software developer.',
-        'image': 'https://links.hsichen.dev/profile/hsi.png',
-        'url': 'https://links.hsichen.dev',
-        'sameAs': webProfileUrls,
+        description: 'Design-focused software developer.',
+        imagePath: '/profile/hsi.png',
+        siteUrl: 'https://links.hsichen.dev',
+    },
+    sago: {
+        name: 'Sago Cream',
+        alternateNames: ['orangesago', 'OrangeSagoCream', 'sagocream'],
+        description: 'Art, music, and games.',
+        imagePath: '/profile/sago.jpg',
+        siteUrl: 'https://links.sagocream.com',
     },
 } as const;
 
-const profileStructuredDataJson = JSON.stringify(
-    profileStructuredData
-).replaceAll('<', String.raw`\u003c`);
+export function App({ profile = 'hsi' }: AppProps): JSX.Element {
+    const identity = profiles[profile];
+    const isSago = profile === 'sago';
+    const visibleSocialLinks = isSago
+        ? socialLinks.filter(({ label }) => sagoLinkLabels.has(label))
+        : socialLinks;
+    const webProfileUrls = visibleSocialLinks
+        .map(({ href }) => href)
+        .filter((href) => href.startsWith('https://'));
+    const profileStructuredDataJson = JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'ProfilePage',
+        'mainEntity': {
+            '@type': 'Person',
+            'name': identity.name,
+            'alternateName': identity.alternateNames,
+            'description': identity.description,
+            'image': `${identity.siteUrl}${identity.imagePath}`,
+            'url': identity.siteUrl,
+            'sameAs': webProfileUrls,
+        },
+    }).replaceAll('<', String.raw`\u003c`);
 
-export function App(): JSX.Element {
     return (
         <>
             <script
@@ -130,24 +165,26 @@ export function App(): JSX.Element {
             <main className='app'>
                 <ShaderBackground />
                 <div className='linktree'>
-                    <QRCodeDialog />
-                    <header className='identity identity--hsi'>
+                    <QRCodeDialog siteUrl={identity.siteUrl} />
+                    <header className='identity identity--primary'>
                         <Image
-                            alt='Hsi Chen'
+                            alt={identity.name}
                             className='identity-card__avatar'
                             height={104}
                             priority
-                            src='/profile/hsi.png'
+                            src={identity.imagePath}
                             width={104}
                         />
-                        <h1 className='identity-card__title'>Hsi Chen</h1>
+                        <h1 className='identity-card__title'>
+                            {identity.name}
+                        </h1>
                         <p className='identity-card__description'>
-                            Design-focused software developer.
+                            {identity.description}
                         </p>
                     </header>
 
                     <nav aria-label='Social links' className='social-list'>
-                        {socialLinks.map(
+                        {visibleSocialLinks.map(
                             ({ label, href, logoAlt, logoSrc, toneClass }) => (
                                 <a
                                     className={`social-link ${toneClass}`}
@@ -178,19 +215,21 @@ export function App(): JSX.Element {
                         )}
                     </nav>
 
-                    <footer className='identity identity--sago'>
-                        <p className='identity-card__description'>
-                            My creative side for art, music, and games.
-                        </p>
-                        <h2 className='identity-card__title'>Sago Cream</h2>
-                        <Image
-                            alt='Sago Cream'
-                            className='identity-card__avatar'
-                            height={104}
-                            src='/profile/sago.jpg'
-                            width={104}
-                        />
-                    </footer>
+                    {!isSago && (
+                        <footer className='identity identity--sago'>
+                            <p className='identity-card__description'>
+                                My creative side for art, music, and games.
+                            </p>
+                            <h2 className='identity-card__title'>Sago Cream</h2>
+                            <Image
+                                alt='Sago Cream'
+                                className='identity-card__avatar'
+                                height={104}
+                                src='/profile/sago.jpg'
+                                width={104}
+                            />
+                        </footer>
+                    )}
                 </div>
             </main>
         </>

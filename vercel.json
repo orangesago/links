@@ -1,0 +1,34 @@
+{
+    "rewrites": [
+        {
+            "source": "/",
+            "has": [
+                {
+                    "type": "host",
+                    "value": "links.sagocream.com"
+                }
+            ],
+            "destination": "/sago"
+        },
+        {
+            "source": "/robots.txt",
+            "has": [
+                {
+                    "type": "host",
+                    "value": "links.sagocream.com"
+                }
+            ],
+            "destination": "/sago/robots.txt"
+        },
+        {
+            "source": "/sitemap.xml",
+            "has": [
+                {
+                    "type": "host",
+                    "value": "links.sagocream.com"
+                }
+            ],
+            "destination": "/sago/sitemap.xml"
+        }
+    ]
+}

@@ -12,7 +12,9 @@ import type { Gradient } from 'qr-code-styling';
 
 import './QRCodeDialog.css';
 
-const siteUrl = 'https://links.hsichen.dev';
+interface QRCodeDialogProps {
+    readonly siteUrl: string;
+}
 
 function getColorToken(name: string): string {
     return getComputedStyle(document.documentElement)
@@ -43,7 +45,8 @@ function unifyQrGradient(container: HTMLDivElement) {
     }
 }
 
-export function QRCodeDialog(): JSX.Element {
+export function QRCodeDialog({ siteUrl }: QRCodeDialogProps): JSX.Element {
+    const siteHostname = new URL(siteUrl).hostname;
     const dialogRef = useRef<HTMLDialogElement>(null);
     const qrCodeRef = useRef<HTMLDivElement>(null);
     const triggerRef = useRef<HTMLButtonElement>(null);
@@ -137,7 +140,7 @@ export function QRCodeDialog(): JSX.Element {
                 qrCodeRef.current.textContent = '';
             }
         };
-    }, []);
+    }, [siteUrl]);
 
     useEffect(() => {
         const dialog = dialogRef.current;
@@ -260,7 +263,7 @@ export function QRCodeDialog(): JSX.Element {
 
                     <div className='qr-dialog__link-row'>
                         <a className='qr-dialog__url' href={siteUrl}>
-                            links.hsichen.dev
+                            {siteHostname}
                         </a>
                         <button
                             aria-label={copied ? 'Copied link' : 'Copy link'}
