@@ -4,12 +4,12 @@ import type { Metadata } from 'next';
 
 import './global.css';
 
-const siteUrl = new URL('https://links.hsichen.dev');
+const siteUrl = new URL('https://hsichen.dev/links/');
 const siteTitle = 'Hsi Chen | Links';
 const siteDescription =
     'Links to Hsi Chen on GitHub, LinkedIn, Instagram, Threads, and other social profiles.';
 const previewImage = {
-    url: '/og.png',
+    url: 'https://hsichen.dev/links/og.png',
     width: 1200,
     height: 630,
     alt: 'Hsi Chen links preview',
@@ -23,12 +23,12 @@ export const metadata: Metadata = {
     },
     description: siteDescription,
     alternates: {
-        canonical: '/',
+        canonical: 'https://hsichen.dev/links',
     },
     openGraph: {
         title: siteTitle,
         description: siteDescription,
-        url: '/',
+        url: 'https://hsichen.dev/links',
         siteName: 'Hsi Chen Links',
         images: [previewImage],
         type: 'profile',
@@ -52,8 +52,8 @@ export const metadata: Metadata = {
     },
     icons: {
         icon: [
-            { url: '/favicon.svg', type: 'image/svg+xml' },
-            { url: '/favicon.png', sizes: '256x256', type: 'image/png' },
+            { url: '/links/favicon.svg', type: 'image/svg+xml' },
+            { url: '/links/favicon.png', sizes: '256x256', type: 'image/png' },
         ],
     },
     verification: {

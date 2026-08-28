@@ -1,4 +1,4 @@
-const siteUrl = 'https://links.sagocream.com';
+const siteUrl = 'https://sagocream.com/links';
 
 export const dynamic = 'force-static';
 

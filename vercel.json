@@ -1,0 +1,23 @@
+{
+    "$schema": "https://openapi.vercel.sh/vercel.json",
+    "redirects": [
+        {
+            "source": "/:path*",
+            "has": [{ "type": "host", "value": "links.hsichen.dev" }],
+            "destination": "https://hsichen.dev/links",
+            "permanent": true
+        },
+        {
+            "source": "/:path*",
+            "has": [{ "type": "host", "value": "links.sagocream.com" }],
+            "destination": "https://sagocream.com/links",
+            "permanent": true
+        },
+        {
+            "source": "/",
+            "has": [{ "type": "host", "value": "sagocream.com" }],
+            "destination": "/links",
+            "permanent": false
+        }
+    ]
+}
