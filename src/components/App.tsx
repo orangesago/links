@@ -23,77 +23,77 @@ const socialLinks: readonly SocialLink[] = [
         label: 'Facebook',
         href: 'https://www.facebook.com/profile.php?id=100011113621038',
         logoAlt: 'Facebook',
-        logoSrc: '/svgl/facebook.svg',
+        logoSrc: '/links/svgl/facebook.svg',
         toneClass: 'social-link--facebook',
     },
     {
         label: 'Instagram',
         href: 'https://www.instagram.com/ccc_hsi/',
         logoAlt: 'Instagram',
-        logoSrc: '/svgl/instagram.svg',
+        logoSrc: '/links/svgl/instagram.svg',
         toneClass: 'social-link--instagram',
     },
     {
         label: 'Threads',
         href: 'https://www.threads.com/@ccc_hsi',
         logoAlt: 'Threads',
-        logoSrc: '/svgl/threads.svg',
+        logoSrc: '/links/svgl/threads.svg',
         toneClass: 'social-link--threads',
     },
     {
         label: 'LinkedIn',
         href: 'https://www.linkedin.com/in/its-hsi-chen/',
         logoAlt: 'LinkedIn',
-        logoSrc: '/svgl/linkedin.svg',
+        logoSrc: '/links/svgl/linkedin.svg',
         toneClass: 'social-link--linkedin',
     },
     {
         label: 'GitHub',
         href: 'https://github.com/sago-cream',
         logoAlt: 'GitHub',
-        logoSrc: '/svgl/github.svg',
+        logoSrc: '/links/svgl/github.svg',
         toneClass: 'social-link--github',
     },
     {
         label: 'Twitter',
         href: 'https://x.com/orangesago',
         logoAlt: 'Twitter',
-        logoSrc: '/svgl/x.svg',
+        logoSrc: '/links/svgl/x.svg',
         toneClass: 'social-link--twitter',
     },
     {
         label: 'Pixiv',
         href: 'https://www.pixiv.net/users/64764125',
         logoAlt: 'Pixiv',
-        logoSrc: '/svgl/pixiv.jpeg',
+        logoSrc: '/links/svgl/pixiv.jpeg',
         toneClass: 'social-link--pixiv',
     },
     {
         label: 'Discord',
         href: 'discord://-/users/917446775873343600',
         logoAlt: 'Discord',
-        logoSrc: '/svgl/discord.svg',
+        logoSrc: '/links/svgl/discord.svg',
         toneClass: 'social-link--discord',
     },
     {
         label: 'Spotify',
         href: 'https://open.spotify.com/user/31bturepoosptp5xv2vln3nqz7ca',
         logoAlt: 'Spotify',
-        logoSrc: '/svgl/spotify.svg',
+        logoSrc: '/links/svgl/spotify.svg',
         toneClass: 'social-link--spotify',
     },
     {
         label: 'Steam',
         href: 'https://steamcommunity.com/id/sagocream/',
         logoAlt: 'Steam',
-        logoSrc: '/svgl/steam.svg',
+        logoSrc: '/links/svgl/steam.svg',
         toneClass: 'social-link--steam',
     },
     {
         label: 'TETR.IO',
         href: 'https://ch.tetr.io/u/sagocream',
         logoAlt: 'TETR.IO',
-        logoSrc: '/svgl/tetrio.svg',
+        logoSrc: '/links/svgl/tetrio.svg',
         toneClass: 'social-link--tetrio',
     },
 ];
@@ -119,15 +119,15 @@ const profiles = {
             'sagocream',
         ],
         description: 'Design-focused software developer.',
-        imagePath: '/profile/hsi.png',
-        siteUrl: 'https://links.hsichen.dev',
+        imagePath: '/links/profile/hsi.png',
+        siteUrl: 'https://hsichen.dev/links',
     },
     sago: {
         name: 'Sago Cream',
         alternateNames: ['orangesago', 'OrangeSagoCream', 'sagocream'],
         description: 'Art, music, and games.',
-        imagePath: '/profile/sago.jpg',
-        siteUrl: 'https://links.sagocream.com',
+        imagePath: '/links/profile/sago.jpg',
+        siteUrl: 'https://sagocream.com/links',
     },
 } as const;
 
@@ -154,7 +154,7 @@ export function App({ profile = 'hsi' }: AppProps): JSX.Element {
             'name': identity.name,
             'alternateName': identity.alternateNames,
             'description': identity.description,
-            'image': `${identity.siteUrl}${identity.imagePath}`,
+            'image': new URL(identity.imagePath, identity.siteUrl).toString(),
             'url': identity.siteUrl,
             'sameAs': webProfileUrls,
         },
@@ -231,7 +231,7 @@ export function App({ profile = 'hsi' }: AppProps): JSX.Element {
                                 alt='Sago Cream'
                                 className='identity-card__avatar'
                                 height={104}
-                                src='/profile/sago.jpg'
+                                src='/links/profile/sago.jpg'
                                 width={104}
                             />
                         </footer>

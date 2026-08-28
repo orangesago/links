@@ -7,30 +7,30 @@ export const siteProfile: SiteProfile =
 
 export const siteUrl =
     siteProfile === 'sago'
-        ? 'https://links.sagocream.com'
-        : 'https://links.hsichen.dev';
+        ? 'https://sagocream.com/links'
+        : 'https://hsichen.dev/links';
 
 const sagoSiteTitle = 'Sago Cream | Links';
 const sagoSiteDescription =
     'Art, music, gaming, and social links for Sago Cream.';
 
 export const sagoMetadata: Metadata = {
-    metadataBase: new URL('https://links.sagocream.com'),
+    metadataBase: new URL('https://sagocream.com/links/'),
     title: {
         absolute: sagoSiteTitle,
     },
     description: sagoSiteDescription,
     alternates: {
-        canonical: '/',
+        canonical: siteUrl,
     },
     openGraph: {
         title: sagoSiteTitle,
         description: sagoSiteDescription,
-        url: '/',
+        url: siteUrl,
         siteName: 'Sago Cream Links',
         images: [
             {
-                url: '/profile/sago.jpg',
+                url: `${siteUrl}/profile/sago.jpg`,
                 width: 1540,
                 height: 1540,
                 alt: 'Sago Cream',
@@ -42,9 +42,9 @@ export const sagoMetadata: Metadata = {
         card: 'summary',
         title: sagoSiteTitle,
         description: sagoSiteDescription,
-        images: ['/profile/sago.jpg'],
+        images: [`${siteUrl}/profile/sago.jpg`],
     },
     icons: {
-        icon: [{ url: '/profile/sago.jpg', type: 'image/jpeg' }],
+        icon: [{ url: `${siteUrl}/profile/sago.jpg`, type: 'image/jpeg' }],
     },
 };
