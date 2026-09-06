@@ -121,6 +121,7 @@ const profiles = {
         description: 'Design-focused software developer.',
         imagePath: '/links/profile/hsi.png',
         siteUrl: 'https://hsichen.dev/links',
+        homeUrl: 'https://hsichen.dev',
     },
     sago: {
         name: 'Sago Cream',
@@ -128,6 +129,7 @@ const profiles = {
         description: 'Art, music, and games.',
         imagePath: '/links/profile/sago.jpg',
         siteUrl: 'https://sagocream.com/links',
+        homeUrl: 'https://sagocream.com',
     },
 } as const;
 
@@ -173,14 +175,20 @@ export function App({ profile = 'hsi' }: AppProps): JSX.Element {
                     <header
                         className={`identity identity--primary${isSago ? ' identity--sago-primary' : ''}`}
                     >
-                        <Image
-                            alt={identity.name}
-                            className='identity-card__avatar'
-                            height={104}
-                            priority
-                            src={identity.imagePath}
-                            width={104}
-                        />
+                        <a
+                            aria-label={`${identity.name} home`}
+                            className='identity-card__photo-link'
+                            href={identity.homeUrl}
+                        >
+                            <Image
+                                alt={identity.name}
+                                className='identity-card__avatar'
+                                height={104}
+                                priority
+                                src={identity.imagePath}
+                                width={104}
+                            />
+                        </a>
                         <h1 className='identity-card__title'>
                             {identity.name}
                         </h1>
@@ -227,13 +235,19 @@ export function App({ profile = 'hsi' }: AppProps): JSX.Element {
                                 My creative side for art, music, and games.
                             </p>
                             <h2 className='identity-card__title'>Sago Cream</h2>
-                            <Image
-                                alt='Sago Cream'
-                                className='identity-card__avatar'
-                                height={104}
-                                src='/links/profile/sago.jpg'
-                                width={104}
-                            />
+                            <a
+                                aria-label='Sago Cream home'
+                                className='identity-card__photo-link'
+                                href={profiles.sago.homeUrl}
+                            >
+                                <Image
+                                    alt='Sago Cream'
+                                    className='identity-card__avatar'
+                                    height={104}
+                                    src='/links/profile/sago.jpg'
+                                    width={104}
+                                />
+                            </a>
                         </footer>
                     )}
                 </div>
