@@ -97,6 +97,11 @@ a {
     color: var(--clr-text);
 }
 
+.identity-card__photo-link {
+    display: flex;
+    border-radius: 50%;
+}
+
 .identity-card__avatar {
     width: var(--size-profile-avatar);
     height: var(--size-profile-avatar);
@@ -128,7 +133,7 @@ a {
     margin-bottom: calc(var(--space-8) * -1);
 }
 
-.identity--sago .identity-card__avatar {
+.identity--sago .identity-card__photo-link {
     margin-top: calc(var(--space-12) / 2);
 }
 
